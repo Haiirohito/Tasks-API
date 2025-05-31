@@ -29,10 +29,11 @@ async def lifespan(app: FastAPI):
     app.state.mongo_client = client
     yield
     client.close()
-    print(f"{Fore.MAGENTA}DATABASE:{Style.RESET_ALL} Database connection terminated ...")
+    print(
+        f"{Fore.MAGENTA}DATABASE:{Style.RESET_ALL} Database connection terminated ..."
+    )
 
 
 app = FastAPI(lifespan=lifespan)
-
 
 app.include_router(task_router, prefix="/tasks", tags=["Tasks"])
